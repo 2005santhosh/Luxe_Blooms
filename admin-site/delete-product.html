@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Product - Luxe Blooms Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { 
+      --primary: #E91E63; 
+      --secondary: #009688;
+      --accent: #FF9800;
+      --bg-light: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --border-color: #E0E0E0;
+      --shadow-soft: 0 2px 10px rgba(0,0,0,0.1);
+      --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    body { 
+      background-color: var(--bg-light); 
+      color: var(--text-primary); 
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .admin-navbar { 
+      background: rgba(255, 255, 255, 0.95); 
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+      color: var(--text-primary);
+      padding: 0.8rem 0;
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary) !important;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 500;
+      margin: 0 0.3rem;
+      padding: 0.4rem 0.8rem !important;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(233, 30, 99, 0.1);
+      color: var(--primary) !important;
+    }
+    
+    .nav-link.active {
+      background-color: rgba(233, 30, 99, 0.2);
+      color: var(--primary) !important;
+    }
+    
+    .navbar-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    
+    .navbar-collapse {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .navbar-toggler {
+      border-color: var(--border-color);
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .btn-admin { 
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border: none; 
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-admin:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+      background: linear-gradient(135deg, #C2185B, var(--primary));
+    }
+    
+    .card-admin { 
+      box-shadow: var(--shadow-soft); 
+      border-radius: 20px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+    
+    .card-admin .card-body {
+      padding: 2.5rem;
+    }
+    
+    .btn-danger {
+      background: linear-gradient(135deg, var(--accent), #FFB74D);
+      border: none; 
+      color: var(--text-primary);
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+      background: linear-gradient(135deg, #F57C00, var(--accent));
+    }
+    
+    .btn-outline-secondary {
+      border-color: var(--border-color);
+      color: var(--text-secondary);
+      background-color: transparent;
+      font-weight: 500;
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+      background-color: var(--border-color);
+      color: var(--text-primary);
+    }
+    
+    .alert-danger {
+      background-color: rgba(220, 53, 69, 0.1);
+      border-color: var(--primary);
+      color: var(--text-primary);
+      border-radius: 10px;
+    }
+    
+    .alert-success {
+      background-color: rgba(40, 167, 69, 0.1);
+      border-color: #28a745;
+      color: var(--text-primary);
+      border-radius: 10px;
+    }
+    
+    .fade-in { 
+      animation: fadeIn 0.8s ease-in; 
+    }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(30px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    .page-header {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      color: var(--primary);
+      margin: 0;
+    }
+    
+    .products-section {
+      margin-bottom: 2rem;
+    }
+    
+    .products-section h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    
+    .category-section {
+      margin-bottom: 2rem;
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .category-title {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .category-icon {
+      margin-right: 0.5rem;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+    
+    .category-count {
+      background-color: var(--bg-light);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-left: 0.8rem;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .product-item {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .product-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .product-item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-item h6 {
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+    
+    .product-item .price {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-item .description {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    
+    .search-section {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .search-section h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .search-input-group {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .search-input-group .form-control {
+      flex: 1;
+    }
+    
+    .form-control, .form-select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      background-color: var(--card-bg);
+      border-color: var(--primary);
+      color: var(--text-primary);
+      box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+    }
+    
+    .no-results i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .products-loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+    }
+    
+    .products-loading i {
+      font-size: 2rem;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .delete-confirmation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .delete-modal {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .delete-modal h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .delete-modal p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .delete-modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      
+      .page-title {
+        font-size: 1.5rem;
+      }
+      
+      .search-input-group {
+        flex-direction: column;
+      }
+      
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .navbar-nav {
+        flex-direction: column;
+      }
+      
+      .nav-link {
+        margin: 0.2rem 0;
+      }
+      
+      .delete-modal-buttons {
+        flex-direction: column;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .navbar-nav {
+        flex-direction: row;
+      }
+    }
+  </style>
+  
+  <script>
+  // Common auth check for all admin pages (except login)
+  if (window.location.pathname !== '/admin/login.html') {
+    fetch('/api/admin/check-auth')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.authenticated) {
+          window.location.href = '/admin/login.html';
+        }
+      })
+      .catch(() => window.location.href = '/admin/login.html');
+  }
+  </script>
+</head>
+<body>
+  <nav class="navbar admin-navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/admin/dashboard.html">
+        <i class="fas fa-spa me-2"></i> Luxe Blooms Admin
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/dashboard.html">
+              <i class="fas fa-home me-1"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-product.html">
+              <i class="fas fa-plus me-1"></i> Add Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/edit-product.html">
+              <i class="fas fa-edit me-1"></i> Edit Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/delete-product.html">
+              <i class="fas fa-trash me-1"></i> Delete Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/admin_shop.html" >
+              <i class="fas fa-store me-1"></i> View Shop
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="handleLogout()">
+              <i class="fas fa-sign-out-alt me-1"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <div class="page-header fade-in">
+      <h1 class="page-title">Delete Product</h1>
+      <a href="/admin/dashboard.html" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+      </a>
+    </div>
+    
+    <div class="card card-admin fade-in">
+      <div class="card-body">
+        <div class="search-section">
+          <h3><i class="fas fa-search me-2"></i> Find Product to Delete</h3>
+          <div class="search-input-group">
+            <input type="text" id="search-name" class="form-control" placeholder="Enter product name to search">
+            <button class="btn btn-danger" onclick="searchAndLoadProduct()">
+              <i class="fas fa-search me-2"></i> Search
+            </button>
+          </div>
+        </div>
+        
+        <!-- Products Section - Now below the search bar -->
+        <div class="products-section">
+          <h3><i class="fas fa-boxes me-2"></i> Products by Category</h3>
+          <div id="products-container">
+            <div class="products-loading">
+              <i class="fas fa-spinner"></i>
+              <p>Loading products...</p>
+            </div>
+          </div>
+        </div>
+        
+        <div id="no-results" class="no-results" style="display: none;">
+          <i class="fas fa-search"></i>
+          <h4>No product found</h4>
+          <p>Please check the product name and try again</p>
+        </div>
+        
+        <div id="delete-error" class="alert alert-danger mt-4" style="display: none;">
+          <i class="fas fa-exclamation-circle me-2"></i>
+          <span></span>
+        </div>
+        <div id="delete-success" class="alert alert-success mt-4" style="display: none;">
+          <i class="fas fa-check-circle me-2"></i>
+          Product deleted successfully!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-confirmation" class="delete-confirmation" style="display: none;">
+    <div class="delete-modal">
+      <h3><i class="fas fa-exclamation-triangle me-2"></i> Confirm Deletion</h3>
+      <p>Are you sure you want to delete "<span id="delete-product-name"></span>"? This action cannot be undone.</p>
+      <div class="delete-modal-buttons">
+        <button class="btn btn-outline-secondary" onclick="cancelDelete()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmDelete()">
+          <i class="fas fa-trash me-2"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let productToDelete = null;
+    
+    async function handleLogout() {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST' });
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+      window.location.href = '/admin/login.html';
+    }
+
+    // Get category icon
+    function getCategoryIcon(category) {
+      const icons = {
+        'Bouquet': 'fa-seedling',
+        'Personalized': 'fa-heart',
+        'Chocolate': 'fa-cookie-bite',
+        'Gift': 'fa-gift'
+      };
+      return icons[category] || 'fa-box';
+    }
+
+    // Load all products by category
+    async function loadAllProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (!response.ok) throw new Error('Failed to load products');
+        
+        const products = await response.json();
+        const container = document.getElementById('products-container');
+        
+        if (products.length === 0) {
+          container.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-box-open"></i>
+              <h4>No products found</h4>
+              <p>Add some products to get started</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Group products by category
+        const productsByCategory = {};
+        products.forEach(product => {
+          if (!productsByCategory[product.category]) {
+            productsByCategory[product.category] = [];
+          }
+          productsByCategory[product.category].push(product);
+        });
+        
+        // Generate HTML for each category
+        let categoriesHTML = '';
+        
+        // Sort categories alphabetically
+        const sortedCategories = Object.keys(productsByCategory).sort();
+        
+        sortedCategories.forEach(category => {
+          const categoryProducts = productsByCategory[category];
+          const categoryIcon = getCategoryIcon(category);
+          
+          // Generate product grid for this category
+          const productGrid = categoryProducts.map(product => `
+            <div class="product-item">
+              <img src="${product.imageUrl}" alt="${product.name}">
+              <h6>${product.name}</h6>
+              <div class="description">${product.description.substring(0, 50)}...</div>
+              <div class="price">₹${product.price}</div>
+              <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmation('${product._id}', '${product.name}')">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          `).join('');
+          
+          categoriesHTML += `
+            <div class="category-section">
+              <div class="category-header">
+                <h4 class="category-title">
+                  <i class="fas ${categoryIcon} category-icon"></i>
+                  ${category}
+                </h4>
+                <span class="category-count">${categoryProducts.length} items</span>
+              </div>
+              <div class="product-grid">
+                ${productGrid}
+              </div>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = categoriesHTML;
+      } catch (err) {
+        console.error('Error loading products:', err);
+        document.getElementById('products-container').innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h4>Error loading products</h4>
+            <p>Please try again later</p>
+          </div>
+        `;
+      }
+    }
+
+    // Show delete confirmation modal
+    function showDeleteConfirmation(productId, productName) {
+      productToDelete = productId;
+      document.getElementById('delete-product-name').textContent = productName;
+      document.getElementById('delete-confirmation').style.display = 'flex';
+    }
+
+    // Cancel delete operation
+    function cancelDelete() {
+      productToDelete = null;
+      document.getElementById('delete-confirmation').style.display = 'none';
+    }
+
+    // Confirm delete operation
+    async function confirmDelete() {
+      if (!productToDelete) return;
+      
+      try {
+        const response = await fetch(`/api/admin/products/${productToDelete}`, { 
+          method: 'DELETE' 
+        });
+        
+        if (response.ok) {
+          // Hide modal
+          document.getElementById('delete-confirmation').style.display = 'none';
+          
+          // Show success message
+          const successDiv = document.getElementById('delete-success');
+          successDiv.style.display = 'block';
+          
+          // Reload products list
+          loadAllProducts();
+          
+          // Hide success message after 3 seconds
+          setTimeout(() => {
+            successDiv.style.display = 'none';
+          }, 3000);
+        } else {
+          const data = await response.json();
+          showError(data.error || 'Failed to delete product');
+        }
+      } catch (err) {
+        showError('Network error. Please check your connection and try again.');
+      }
+      
+      productToDelete = null;
+    }
+
+    async function searchAndLoadProduct() {
+      const name = document.getElementById('search-name').value.trim();
+      if (!name) {
+        showError('Please enter a product name');
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/admin/products/search?name=${encodeURIComponent(name)}`);
+        if (!response.ok) {
+          document.getElementById('no-results').style.display = 'block';
+          return;
+        }
+        
+        const product = await response.json();
+        
+        // Show delete confirmation for the found product
+        showDeleteConfirmation(product._id, product.name);
+        
+        // Clear search field
+        document.getElementById('search-name').value = '';
+        
+      } catch (err) {
+        showError('Error searching for product. Please try again.');
+      }
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('delete-error');
+      const errorSpan = errorDiv.querySelector('span');
+      errorSpan.textContent = message;
+      errorDiv.style.display = 'block';
+      
+      // Hide error after 5 seconds
+      setTimeout(() => {
+        errorDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    // Initial load
+    loadAllProducts();
+  </script>
+</body>
+</html>

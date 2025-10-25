@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxe Blooms - Premium Bouquets</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { 
+      --primary: #E91E63; 
+      --secondary: #009688;
+      --accent: #FF9800;
+      --bg-light: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --border-color: #E0E0E0;
+      --shadow-soft: 0 2px 10px rgba(0,0,0,0.1);
+      --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    body { 
+      background-color: var(--bg-light); 
+      color: var(--text-primary); 
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary) !important;
+    }
+    
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+      padding: 0.5rem 0;
+    }
+    
+    .navbar-toggler {
+      border-color: var(--border-color);
+    }
+    
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary) !important;
+    }
+    
+    .hero { 
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.15) 0%, rgba(0, 150, 136, 0.15) 100%), 
+                  url('https://images.unsplash.com/photo-1531120364508-a6b656c3e78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      min-height: 80vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    .hero-content {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+    
+    .hero h1 {
+      color: var(--text-primary);
+      font-size: 3.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+    }
+    
+    .product-card { 
+      border: none;
+      border-radius: 15px; 
+      transition: all 0.3s ease; 
+      overflow: hidden;
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      position: relative;
+    }
+    
+    .product-card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .product-card .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    .product-card:hover .card-img-top {
+      transform: scale(1.02);
+    }
+    
+    .product-card .card-body {
+      padding: 1.25rem;
+    }
+    
+    .product-card .card-title {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-card .card-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .btn-primary { 
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border: none; 
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .btn-primary:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+      background: linear-gradient(135deg, #C2185B, var(--primary));
+    }
+    
+    .btn-outline-secondary {
+      border-color: var(--secondary);
+      color: var(--secondary);
+      font-weight: 500;
+    }
+    
+    .btn-outline-secondary:hover {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+    
+    .fade-in { 
+      animation: fadeIn 0.6s ease-out; 
+    }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    
+    .product-category {
+      margin-bottom: 3rem;
+    }
+    
+    .category-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--primary);
+      text-align: center;
+      font-weight: 700;
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(135deg, var(--card-bg), #F1F8E9);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .testimonial-card .quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .testimonial-card .quote::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--secondary);
+      position: absolute;
+      left: -20px;
+      top: -10px;
+      font-family: serif;
+    }
+    
+    .testimonial-card .author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .testimonial-card .author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      border: 2px solid var(--secondary);
+    }
+    
+    .testimonial-card .author h6 {
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+    
+    .newsletter {
+      background: linear-gradient(135deg, var(--secondary) 0%, #26A69A 100%);
+      padding: 4rem 0;
+      border-radius: 20px;
+      margin: 4rem 0;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      color: white;
+    }
+    
+    .newsletter h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .newsletter p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    .newsletter .form-control {
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid rgba(255,255,255,0.5);
+      background-color: white;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .newsletter .btn {
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border: none;
+      color: white;
+    }
+    
+    .footer {
+      background: linear-gradient(135deg, #424242 0%, #616161 100%);
+      color: #FAFAFA;
+      padding: 3rem 0 1rem;
+    }
+    
+    .footer h5 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .footer ul li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer ul li a {
+      color: #BDBDBD;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer ul li a:hover {
+      color: var(--accent);
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255,255,255,0.1);
+      color: #FAFAFA;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--accent);
+      color: #212121;
+      transform: translateY(-2px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #BDBDBD;
+      font-size: 0.9rem;
+      color: #BDBDBD;
+    }
+    
+    .why-choose {
+      padding: 4rem 0;
+      background: linear-gradient(135deg, var(--bg-light) 0%, #E0F2F1 100%);
+    }
+    
+    .feature-box {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 15px;
+      background: white;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+    
+    .feature-box i {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    
+    .feature-box p {
+      color: var(--text-secondary);
+    }
+    
+    .price-tag {
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    
+    /* Mobile Optimizations - Amazon-like clean, single-column flow */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 60vh;
+        padding: 2rem 0;
+      }
+      
+      .hero-content {
+        padding: 2rem 1rem;
+        margin: 0 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .category-title {
+        font-size: 1.6rem;
+      }
+      
+      .product-card .card-img-top {
+        height: 200px;
+      }
+      
+      .product-card .card-body {
+        padding: 1rem;
+      }
+      
+      .feature-box {
+        padding: 2rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .newsletter {
+        padding: 3rem 1rem;
+        margin: 2rem 1rem;
+      }
+      
+      .newsletter h3 {
+        font-size: 2rem;
+      }
+      
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      /* Ensure single column with full-width, spaced like Amazon product list */
+      .row.g-4 > [class*="col-"] {
+        padding-bottom: 1.5rem;
+      }
+      
+      .product-card {
+        margin-bottom: 1rem;
+        border-radius: 12px;
+      }
+    }
+    
+    /* Additional mesmerizing touches */
+    .hero {
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(233, 30, 99, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0, 150, 136, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">Luxe Blooms 🌸</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#bouquets">Bouquets</a></li>
+          <li class="nav-item"><a class="nav-link" href="#personalized">Personalized</a></li>
+          <li class="nav-item"><a class="nav-link" href="/shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero d-flex align-items-center">
+    <div class="container hero-content fade-in">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="display-4 fw-bold mb-4">Welcome to Luxe Blooms</h1>
+          <p class="lead mb-4">Handcrafted bouquets that speak from the heart. Personalize your love today.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#bouquets" class="btn btn-primary btn-lg px-4 py-2">Shop Bouquets</a>
+            <a href="#personalized" class="btn btn-outline-secondary btn-lg px-4 py-2">Personalized Gifts</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="/assets/index.jpg" alt="Hero Bouquet" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover; border-radius: 15px;" onerror="this.src='https://images.unsplash.com/photo-1531120364508-a6b656c3e78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'; this.onerror=null;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-choose">
+    <div class="container">
+      <h2 class="section-title text-center fade-in">Why Choose Luxe Blooms</h2>
+      <div class="row mt-4">
+        <div class="col-md-4 col-sm-6 fade-in">
+          <div class="feature-box">
+            <i class="fas fa-heart"></i>
+            <h4>Handcrafted</h4>
+            <p>Each bouquet is carefully crafted by our expert florists with attention to detail.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 fade-in">
+          <div class="feature-box">
+            <i class="fas fa-certificate"></i>
+            <h4>Premium Quality</h4>
+            <p>We source only the freshest flowers and highest quality materials.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 fade-in">
+          <div class="feature-box">
+            <i class="fas fa-smile"></i>
+            <h4>100% Satisfaction</h4>
+            <p>Our happiness guarantee ensures you love your purchase or we'll make it right.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bouquets" class="container py-5">
+    <h2 class="section-title text-center fade-in">Our Signature Bouquets</h2>
+    
+    <div class="product-category">
+      <h3 class="category-title fade-in" id="bouquet-category-title">Bouquets</h3>
+      <div id="bouquets-container" class="row g-4"></div>
+    </div>
+  </section>
+  
+  <section id="personalized" class="container py-5">
+    <h2 class="section-title text-center fade-in">Personalized Gifts</h2>
+    <div id="personalized-container" class="row g-4"></div>
+  </section>
+
+  <section id="testimonials" class="container py-5">
+    <h2 class="section-title text-center fade-in">What Our Customers Say</h2>
+    <div class="row mt-4">
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="testimonial-card">
+          <div class="quote">The ribbon rose bouquet was absolutely stunning! It looked so real and has lasted for months. Perfect gift for my wife's anniversary.</div>
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer">
+            <div>
+              <h6 class="mb-0">Michael Thompson</h6>
+              <small class="text-secondary">Verified Buyer</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="testimonial-card">
+          <div class="quote">I ordered the personalized letter and mini photo bouquet for my mother's birthday. She was moved to tears. Thank you Luxe Blooms!</div>
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer">
+            <div>
+              <h6 class="mb-0">Sarah Johnson</h6>
+              <small class="text-secondary">Verified Buyer</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="testimonial-card">
+          <div class="quote">The chocolate bouquet was a hit at our office party! Not only did it look beautiful, but the chocolates were delicious too.</div>
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Customer">
+            <div>
+              <h6 class="mb-0">David Wilson</h6>
+              <small class="text-secondary">Verified Buyer</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="container">
+      <h3>Join the Luxe Blooms Family</h3>
+      <p>Subscribe to our newsletter for exclusive offers, floral care tips, and special promotions.</p>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <form class="d-flex gap-2">
+            <input type="email" class="form-control" placeholder="Your email address" required>
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <h5>Luxe Blooms</h5>
+          <p>Creating beautiful moments with our handcrafted bouquets and personalized gifts since 2010.</p>
+          <!-- <div class="social-icons mt-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div> -->
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#bouquets">Bouquets</a></li>
+            <li><a href="#personalized">Personalized Gifts</a></li>
+            <li><a href="#">Occasions</a></li>
+            <li><a href="#">Flower Care</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+          <h5>Contact Information</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt me-2"></i> 3-49/1 rekurthi karimnagar </li>
+            <li><i class="fas fa-phone me-2"></i> +91 7032621434</li>
+            <li><i class="fas fa-envelope me-2"></i>chandanaammu325@gmail.com</li>
+            <!-- <li><i class="fas fa-clock me-2"></i> Mon-Fri: 9am-6pm, Sat: 10am-4pm</li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Luxe Blooms. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links with navbar close on mobile
+    document.querySelectorAll('.nav-link[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+        // Close navbar collapse on mobile after clicking a link
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+          navbarCollapse.classList.remove('show');
+        }
+      });
+    });
+
+    // Ensure toggler works properly (Bootstrap handles, but explicit for reliability)
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarToggler && navbarCollapse) {
+      navbarToggler.addEventListener('click', function () {
+        navbarCollapse.classList.toggle('show');
+      });
+    }
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe cards after rendering
+    function observeCards() {
+      document.querySelectorAll('.product-card, .feature-box, .testimonial-card').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // Fetch and render products - Updated for new theme
+    async function loadProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (!response.ok) throw new Error('Failed to fetch products');
+        const products = await response.json();
+
+        // Group products by category
+        const bouquets = products.filter(p => p.category === 'Bouquet');
+        const personalized = products.filter(p => p.category === 'Personalized');
+        const chocolates = products.filter(p => p.category === 'Chocolate');
+
+        // Render Bouquets
+        const bouquetsContainer = document.getElementById('bouquets-container');
+        if (bouquets.length > 0) {
+          document.getElementById('bouquet-category-title').textContent = 'Bouquets';
+          bouquetsContainer.innerHTML = bouquets.map(product => `
+            <div class="col-lg-4 col-md-6 col-12">
+              <div class="card product-card">
+                <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1531120364508-a6b656c3e78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${product.name}</h5>
+                  <p class="card-text">${product.description}</p>
+                  <div class="price-tag">₹${product.price}</div>
+                  <a href="/product.html?id=${product._id}" class="btn btn-primary mt-auto w-100">View Details</a>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          bouquetsContainer.innerHTML = '<div class="col-12"><p class="text-center text-secondary">No bouquets available at the moment.</p></div>';
+        }
+
+        // Render Personalized
+        const personalizedContainer = document.getElementById('personalized-container');
+        if (personalized.length > 0) {
+          personalizedContainer.innerHTML = personalized.map(product => `
+            <div class="col-lg-4 col-md-6 col-12">
+              <div class="card product-card">
+                <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${product.name}</h5>
+                  <p class="card-text">${product.description}</p>
+                  <div class="price-tag">₹${product.price}</div>
+                  <a href="/product.html?id=${product._id}" class="btn btn-primary mt-auto w-100">View Details</a>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          personalizedContainer.innerHTML = '<div class="col-12"><p class="text-center text-secondary">No personalized gifts available at the moment.</p></div>';
+        }
+
+        observeCards();
+      } catch (error) {
+        console.error('Error loading products:', error);
+        document.getElementById('bouquets-container').innerHTML = '<div class="col-12"><p class="text-center text-danger">Error loading products. Please try again later.</p></div>';
+        document.getElementById('personalized-container').innerHTML = '<div class="col-12"><p class="text-center text-danger">Error loading products. Please try again later.</p></div>';
+      }
+    }
+
+    // Newsletter form submission
+    document.querySelector('.newsletter form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter soon.`);
+      this.reset();
+    });
+
+    // Load products on page load
+    document.addEventListener('DOMContentLoaded', loadProducts);
+  </script>
+</body>
+</html>

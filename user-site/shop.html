@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Luxe Blooms</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { 
+      --primary: #E91E63; 
+      --secondary: #009688;
+      --accent: #FF9800;
+      --bg-light: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --border-color: #E0E0E0;
+      --shadow-soft: 0 2px 10px rgba(0,0,0,0.1);
+      --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    body { 
+      background-color: var(--bg-light); 
+      color: var(--text-primary); 
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary) !important;
+    }
+    
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+      padding: 0.5rem 0;
+    }
+    
+    .navbar-toggler {
+      border-color: var(--border-color);
+    }
+    
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary) !important;
+    }
+    
+    .product-card { 
+      border: none;
+      border-radius: 15px; 
+      transition: all 0.3s ease; 
+      overflow: hidden;
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      position: relative;
+    }
+    
+    .product-card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .product-card .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    .product-card:hover .card-img-top {
+      transform: scale(1.02);
+    }
+    
+    .product-card .card-body {
+      padding: 1.5rem;
+    }
+    
+    .product-card .card-title {
+      color: var(--text-primary);
+    }
+    
+    .product-card .card-text {
+      color: var(--text-secondary);
+    }
+    
+    .btn-primary { 
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border: none; 
+      color: white;
+      font-weight: 600;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .btn-primary:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+      background: linear-gradient(135deg, #C2185B, var(--primary));
+    }
+    
+    .btn-outline-light {
+      border-color: var(--secondary);
+      color: var(--secondary);
+      font-weight: 500;
+    }
+    
+    .btn-outline-light:hover {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+    
+    .fade-in { 
+      animation: fadeIn 0.6s ease-out; 
+    }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    .form-control, .form-select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 10px;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      background-color: var(--card-bg);
+      border-color: var(--primary);
+      color: var(--text-primary);
+      box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+    }
+    
+    .text-danger {
+      color: var(--primary) !important;
+    }
+    
+    .page-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    
+    .filter-section {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .filter-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .category-pill {
+      background-color: var(--bg-light);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-pill:hover, .category-pill.active {
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .price-range {
+      margin-top: 1rem;
+    }
+    
+    .price-range input[type="range"] {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    
+    .price-display {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-soft);
+      z-index: 1;
+    }
+    
+    .ribbon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .ribbon span {
+      position: absolute;
+      top: 25px;
+      right: -25px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--accent), #FFB74D);
+      color: var(--text-primary);
+      padding: 5px 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .no-products {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+    
+    .no-products i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .no-products h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    
+    .load-more {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .filter-section {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">Luxe Blooms 🌸</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/shop.html">Shop</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container py-5">
+    <div class="page-header fade-in">
+      <h1>Our Bouquet Collection</h1>
+      <p>Discover our handcrafted bouquets and personalized gifts</p>
+    </div>
+
+    <div class="filter-section fade-in">
+      <div class="row">
+        <div class="col-md-5 mb-3">
+          <h3>Search</h3>
+          <div class="input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Search bouquets...">
+            <button class="btn btn-primary" type="button" id="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h3>Categories</h3>
+          <div class="category-pills">
+            <div class="category-pill active" data-category="">All</div>
+            <div class="category-pill" data-category="Bouquet">Bouquet</div>
+            <div class="category-pill" data-category="Personalized">Personalized</div>
+            <div class="category-pill" data-category="Chocolate">Chocolate</div>
+            <div class="category-pill" data-category="Gift">Gift</div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h3>&nbsp;</h3>
+          <button id="apply-filters" class="btn btn-primary w-100">
+            <i class="fas fa-filter me-2"></i> Apply Filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="products-grid" class="row g-4"></div>
+    <div id="loading" class="text-center py-3" style="display: none;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div id="no-products" class="no-products" style="display: none;">
+      <i class="fas fa-search"></i>
+      <h3>No products found</h3>
+      <p>Try adjusting your filters or search terms</p>
+    </div>
+    <div class="load-more">
+      <button id="load-more" class="btn btn-outline-light d-none">
+        <i class="fas fa-plus-circle me-2"></i> Load More
+      </button>
+    </div>
+  </section>
+
+  <script>
+    let currentPage = 0;
+    const itemsPerPage = 8;
+    let allProducts = [];
+    let currentFilters = {
+      search: '',
+      category: '',
+      maxPrice: 10000
+    };
+
+    async function loadProducts(append = false) {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('no-products').style.display = 'none';
+      
+      const params = new URLSearchParams({
+        search: currentFilters.search,
+        category: currentFilters.category,
+        maxPrice: currentFilters.maxPrice,
+        page: currentPage,
+        limit: itemsPerPage
+      });
+      
+      try {
+        const response = await fetch(`/api/products?${params}`);
+        if (!response.ok) throw new Error('Failed to load products');
+        
+        const products = await response.json();
+        document.getElementById('loading').style.display = 'none';
+        
+        if (append) {
+          allProducts = [...allProducts, ...products];
+        } else {
+          allProducts = products;
+        }
+        
+        renderProducts();
+        
+        // Show/hide load more button
+        const loadMoreBtn = document.getElementById('load-more');
+        if (products.length === itemsPerPage) {
+          loadMoreBtn.classList.remove('d-none');
+        } else {
+          loadMoreBtn.classList.add('d-none');
+        }
+        
+        // Show no products message if needed
+        if (allProducts.length === 0) {
+          document.getElementById('no-products').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error loading products:', error);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('no-products').style.display = 'block';
+      }
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = allProducts.map(product => {
+        // Randomly add badges to some products
+        const badges = [];
+        if (Math.random() > 0.7) badges.push('<div class="product-badge">New</div>');
+        if (Math.random() > 0.8) badges.push('<div class="ribbon"><span>Bestseller</span></div>');
+        
+        return `
+          <div class="col-lg-3 col-md-6 fade-in">
+            <div class="card product-card h-100 position-relative">
+              ${badges.join('')}
+              <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text flex-grow-1">${product.description.substring(0, 80)}...</p>
+                <p class="text-danger fw-bold fs-5 mb-3">₹${product.price}</p>
+                <a href="/product.html?id=${product._id}" class="btn btn-primary w-100">
+                  <i class="fas fa-eye me-2"></i> View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Event listeners
+    document.getElementById('search-btn').addEventListener('click', () => {
+      currentFilters.search = document.getElementById('search-input').value;
+      currentPage = 0;
+      loadProducts(false);
+    });
+
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        currentFilters.search = document.getElementById('search-input').value;
+        currentPage = 0;
+        loadProducts(false);
+      }
+    });
+
+    // Category pills
+    document.querySelectorAll('.category-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilters.category = pill.dataset.category;
+      });
+    });
+
+    document.getElementById('apply-filters').addEventListener('click', () => {
+      currentPage = 0;
+      loadProducts(false);
+    });
+
+    // Load more button
+    document.getElementById('load-more').addEventListener('click', () => {
+      currentPage++;
+      loadProducts(true);
+    });
+
+    // Initial load
+    loadProducts();
+  </script>
+</body>
+</html>

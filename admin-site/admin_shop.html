@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Luxe Blooms Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { 
+      --primary: #E91E63; 
+      --secondary: #009688;
+      --accent: #FF9800;
+      --bg-light: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --border-color: #E0E0E0;
+      --shadow-soft: 0 2px 10px rgba(0,0,0,0.1);
+      --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    body { 
+      background-color: var(--bg-light); 
+      color: var(--text-primary); 
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .admin-navbar { 
+      background: rgba(255, 255, 255, 0.95); 
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+      color: var(--text-primary);
+      padding: 0.8rem 0;
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary) !important;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 500;
+      margin: 0 0.3rem;
+      padding: 0.4rem 0.8rem !important;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(233, 30, 99, 0.1);
+      color: var(--primary) !important;
+    }
+    
+    .nav-link.active {
+      background-color: rgba(233, 30, 99, 0.2);
+      color: var(--primary) !important;
+    }
+    
+    .navbar-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    
+    .navbar-collapse {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .navbar-toggler {
+      border-color: var(--border-color);
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .product-card { 
+      border: none;
+      border-radius: 15px; 
+      transition: all 0.3s ease; 
+      overflow: hidden;
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      position: relative;
+    }
+    
+    .product-card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .product-card .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    .product-card:hover .card-img-top {
+      transform: scale(1.02);
+    }
+    
+    .product-card .card-body {
+      padding: 1.5rem;
+    }
+    
+    .product-card .card-title {
+      color: var(--text-primary);
+    }
+    
+    .product-card .card-text {
+      color: var(--text-secondary);
+    }
+    
+    .btn-primary { 
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border: none; 
+      color: white;
+      font-weight: 600;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .btn-primary:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+      background: linear-gradient(135deg, #C2185B, var(--primary));
+    }
+    
+    .btn-outline-secondary {
+      border-color: var(--border-color);
+      color: var(--text-secondary);
+      background-color: transparent;
+      font-weight: 500;
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+      background-color: var(--border-color);
+      color: var(--text-primary);
+    }
+    
+    .fade-in { 
+      animation: fadeIn 0.6s ease-out; 
+    }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    .form-control, .form-select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 10px;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      background-color: var(--card-bg);
+      border-color: var(--primary);
+      color: var(--text-primary);
+      box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+    }
+    
+    .text-danger {
+      color: var(--primary) !important;
+    }
+    
+    .page-header {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      color: var(--primary);
+      margin: 0;
+    }
+    
+    .filter-section {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .filter-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .category-pill {
+      background-color: var(--bg-light);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-pill:hover, .category-pill.active {
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-soft);
+      z-index: 1;
+    }
+    
+    .ribbon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .ribbon span {
+      position: absolute;
+      top: 25px;
+      right: -25px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--accent), #FFB74D);
+      color: var(--text-primary);
+      padding: 5px 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .no-products {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+    
+    .no-products i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .no-products h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    
+    .category-section {
+      margin-bottom: 3rem;
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .category-title {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .category-icon {
+      margin-right: 0.8rem;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    
+    .category-count {
+      background-color: var(--bg-light);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-left: 1rem;
+    }
+    
+    .category-description {
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      margin-left: 2.8rem;
+      font-style: italic;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .product-detail-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .product-modal-content {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      max-width: 800px;
+      width: 90%;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-hover);
+      margin: 20px 0;
+    }
+    
+    .product-modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .product-modal-body {
+      padding: 1.5rem;
+    }
+    
+    .product-modal-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .close-modal:hover {
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      
+      .page-title {
+        font-size: 1.5rem;
+      }
+      
+      .filter-section {
+        margin-bottom: 1.5rem;
+      }
+      
+      .category-title {
+        font-size: 1.5rem;
+      }
+      
+      .category-icon {
+        font-size: 1.5rem;
+      }
+      
+      .navbar-nav {
+        flex-direction: column;
+      }
+      
+      .nav-link {
+        margin: 0.2rem 0;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .navbar-nav {
+        flex-direction: row;
+      }
+    }
+  </style>
+  
+  <script>
+  // Common auth check for all admin pages (except login)
+  if (window.location.pathname !== '/admin/login.html') {
+    fetch('/api/admin/check-auth')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.authenticated) {
+          window.location.href = '/admin/login.html';
+        }
+      })
+      .catch(() => window.location.href = '/admin/login.html');
+  }
+  </script>
+</head>
+<body>
+  <nav class="navbar admin-navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/admin/dashboard.html">
+        <i class="fas fa-spa me-2"></i> Luxe Blooms Admin
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/dashboard.html">
+              <i class="fas fa-home me-1"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-product.html">
+              <i class="fas fa-plus me-1"></i> Add Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/edit-product.html">
+              <i class="fas fa-edit me-1"></i> Edit Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/delete-product.html">
+              <i class="fas fa-trash me-1"></i> Delete Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/admin_shop.html">
+              <i class="fas fa-store me-1"></i> View Shop
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="handleLogout()">
+              <i class="fas fa-sign-out-alt me-1"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container py-5">
+    <div class="page-header fade-in">
+      <h1 class="page-title">Shop Products</h1>
+      <a href="/admin/dashboard.html" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+      </a>
+    </div>
+
+    <div class="filter-section fade-in">
+      <div class="row">
+        <div class="col-md-5 mb-3">
+          <h3>Search</h3>
+          <div class="input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Search products...">
+            <button class="btn btn-primary" type="button" id="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h3>Categories</h3>
+          <div class="category-pills">
+            <div class="category-pill active" data-category="">All</div>
+            <div class="category-pill" data-category="Bouquet">Bouquet</div>
+            <div class="category-pill" data-category="Personalized">Personalized</div>
+            <div class="category-pill" data-category="Chocolate">Chocolate</div>
+            <div class="category-pill" data-category="Gift">Gift</div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h3>&nbsp;</h3>
+          <button id="apply-filters" class="btn btn-primary w-100">
+            <i class="fas fa-filter me-2"></i> Apply Filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="products-container">
+      <div id="loading" class="text-center py-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+    
+    <div id="no-products" class="no-products" style="display: none;">
+      <i class="fas fa-search"></i>
+      <h3>No products found</h3>
+      <p>Try adjusting your filters or search terms</p>
+    </div>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <div id="product-detail-modal" class="product-detail-modal" style="display: none;">
+    <div class="product-modal-content">
+      <div class="product-modal-header">
+        <h2 id="modal-product-name" class="category-title"></h2>
+        <button class="close-modal" onclick="closeProductModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="product-modal-body">
+        <img id="modal-product-image" class="product-modal-image" src="" alt="">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Details</h3>
+            <p><strong>Category:</strong> <span id="modal-product-category"></span></p>
+            <p><strong>Price:</strong> <span id="modal-product-price" class="text-danger"></span></p>
+          </div>
+          <div class="col-md-6">
+            <h3>Description</h3>
+            <p id="modal-product-description"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function handleLogout() {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST' });
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+      window.location.href = '/admin/login.html';
+    }
+
+    let currentPage = 0;
+    const itemsPerPage = 8;
+    let allProducts = [];
+    let currentFilters = {
+      search: '',
+      category: '',
+      maxPrice: 10000
+    };
+
+    // Get category icon
+    function getCategoryIcon(category) {
+      const icons = {
+        'Bouquet': 'fa-seedling',
+        'Personalized': 'fa-heart',
+        'Chocolate': 'fa-cookie-bite',
+        'Gift': 'fa-gift'
+      };
+      return icons[category] || 'fa-box';
+    }
+
+    // Get category description
+    function getCategoryDescription(category) {
+      const descriptions = {
+        'Bouquet': 'Fresh flowers arranged in beautiful bouquets for every occasion',
+        'Personalized': 'Custom-made gifts with personal messages and special touches',
+        'Chocolate': 'Premium chocolates and sweet treats to delight your loved ones',
+        'Gift': 'Unique gift items and accessories that make perfect presents'
+      };
+      return descriptions[category] || 'Special items curated just for you';
+    }
+
+    async function loadProducts(append = false) {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('no-products').style.display = 'none';
+      
+      const params = new URLSearchParams({
+        search: currentFilters.search,
+        category: currentFilters.category,
+        maxPrice: currentFilters.maxPrice,
+        page: currentPage,
+        limit: itemsPerPage
+      });
+      
+      try {
+        const response = await fetch(`/api/products?${params}`);
+        if (!response.ok) throw new Error('Failed to load products');
+        
+        const products = await response.json();
+        document.getElementById('loading').style.display = 'none';
+        
+        if (append) {
+          allProducts = [...allProducts, ...products];
+        } else {
+          allProducts = products;
+        }
+        
+        renderProducts();
+        
+        // Show no products message if needed
+        if (allProducts.length === 0) {
+          document.getElementById('no-products').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error loading products:', error);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('no-products').style.display = 'block';
+      }
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('products-container');
+      
+      if (currentFilters.category) {
+        // If a specific category is selected, show products without category sections
+        container.innerHTML = `
+          <div class="row g-4">
+            ${allProducts.map(product => {
+              // Randomly add badges to some products
+              const badges = [];
+              if (Math.random() > 0.7) badges.push('<div class="product-badge">New</div>');
+              if (Math.random() > 0.8) badges.push('<div class="ribbon"><span>Bestseller</span></div>');
+              
+              return `
+                <div class="col-lg-3 col-md-6 fade-in">
+                  <div class="card product-card h-100 position-relative">
+                    ${badges.join('')}
+                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">${product.name}</h5>
+                      <p class="card-text flex-grow-1">${product.description.substring(0, 80)}...</p>
+                      <p class="text-danger fw-bold fs-5 mb-3">₹${product.price}</p>
+                      <button class="btn btn-primary w-100" onclick="showProductDetail('${product._id}')">
+                        <i class="fas fa-eye me-2"></i> View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      } else {
+        // If no specific category is selected, group products by category
+        // Group products by category
+        const productsByCategory = {};
+        allProducts.forEach(product => {
+          if (!productsByCategory[product.category]) {
+            productsByCategory[product.category] = [];
+          }
+          productsByCategory[product.category].push(product);
+        });
+        
+        // Generate HTML for each category
+        let categoriesHTML = '';
+        
+        // Sort categories alphabetically
+        const sortedCategories = Object.keys(productsByCategory).sort();
+        
+        sortedCategories.forEach(category => {
+          const categoryProducts = productsByCategory[category];
+          const categoryIcon = getCategoryIcon(category);
+          const categoryDescription = getCategoryDescription(category);
+          
+          // Generate product grid for this category
+          const productGrid = categoryProducts.map(product => {
+            // Randomly add badges to some products
+            const badges = [];
+            if (Math.random() > 0.7) badges.push('<div class="product-badge">New</div>');
+            if (Math.random() > 0.8) badges.push('<div class="ribbon"><span>Bestseller</span></div>');
+            
+            return `
+              <div class="col-lg-3 col-md-6 fade-in">
+                <div class="card product-card h-100 position-relative">
+                  ${badges.join('')}
+                  <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text flex-grow-1">${product.description.substring(0, 80)}...</p>
+                    <p class="text-danger fw-bold fs-5 mb-3">₹${product.price}</p>
+                    <button class="btn btn-primary w-100" onclick="showProductDetail('${product._id}')">
+                      <i class="fas fa-eye me-2"></i> View Details
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+          }).join('');
+          
+          categoriesHTML += `
+            <div class="category-section">
+              <div class="category-header">
+                <h2 class="category-title">
+                  <i class="fas ${categoryIcon} category-icon"></i>
+                  ${category}
+                </h2>
+                <span class="category-count">${categoryProducts.length} items</span>
+              </div>
+              <p class="category-description">${categoryDescription}</p>
+              <div class="row g-4">
+                ${productGrid}
+              </div>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = categoriesHTML;
+      }
+    }
+
+    // Show product detail modal
+    async function showProductDetail(productId) {
+      try {
+        const response = await fetch(`/api/products/${productId}`);
+        if (!response.ok) throw new Error('Failed to load product details');
+        
+        const product = await response.json();
+        
+        // Populate modal with product details
+        document.getElementById('modal-product-name').textContent = product.name;
+        document.getElementById('modal-product-image').src = product.imageUrl;
+        document.getElementById('modal-product-category').textContent = product.category;
+        document.getElementById('modal-product-price').textContent = `₹${product.price}`;
+        document.getElementById('modal-product-description').textContent = product.description;
+        
+        // Show modal
+        document.getElementById('product-detail-modal').style.display = 'flex';
+      } catch (error) {
+        console.error('Error loading product details:', error);
+      }
+    }
+
+    // Close product detail modal
+    function closeProductModal() {
+      document.getElementById('product-detail-modal').style.display = 'none';
+    }
+
+    // Event listeners
+    document.getElementById('search-btn').addEventListener('click', () => {
+      currentFilters.search = document.getElementById('search-input').value;
+      currentPage = 0;
+      loadProducts(false);
+    });
+
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        currentFilters.search = document.getElementById('search-input').value;
+        currentPage = 0;
+        loadProducts(false);
+      }
+    });
+
+    // Category pills
+    document.querySelectorAll('.category-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilters.category = pill.dataset.category;
+      });
+    });
+
+    // Apply filters button
+    document.getElementById('apply-filters').addEventListener('click', () => {
+      // Update filters from UI elements
+      currentFilters.search = document.getElementById('search-input').value;
+      
+      // Get active category pill
+      const activePill = document.querySelector('.category-pill.active');
+      if (activePill) {
+        currentFilters.category = activePill.dataset.category;
+      }
+      
+      currentPage = 0;
+      loadProducts(false);
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('product-detail-modal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeProductModal();
+      }
+    });
+
+    // Initial load
+    loadProducts();
+  </script>
+</body>
+</html>
