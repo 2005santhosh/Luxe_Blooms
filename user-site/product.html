@@ -258,7 +258,7 @@
     document.getElementById('buy-now-btn').addEventListener('click', () => {
       if (!currentProduct) return;
       
-      const ownerPhone = '919876543210'; // Owner's WhatsApp number without +
+      const ownerPhone = '917032621434'; // Owner's WhatsApp number without +
       const message = `Hi! I'm interested in ordering the "${currentProduct.name}" for ₹${currentProduct.price}.\n\nProduct Details:\n- Name: ${currentProduct.name}\n- Price: ₹${currentProduct.price}\n- Description: ${currentProduct.description}\n\nPlease let me know the next steps!`;
       
       const whatsappUrl = `https://wa.me/${ownerPhone}?text=${encodeURIComponent(message)}`;
