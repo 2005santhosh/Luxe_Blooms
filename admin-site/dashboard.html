@@ -47,7 +47,7 @@
     
     .navbar-brand {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary) !important;
       display: flex;
@@ -87,12 +87,21 @@
       align-items: center;
     }
     
+    .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
     .btn-admin { 
       background: linear-gradient(135deg, var(--primary), #F06292);
       border: none; 
       color: white;
       font-weight: 600;
-      border-radius: 50px;
+      border-radius: 15px;
       transition: all 0.3s ease;
       text-decoration: none;
       display: flex;
@@ -102,11 +111,12 @@
       height: 100%;
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-color);
-      padding: 2rem 1rem;
+      padding: 1rem 0.3rem;
+      min-height: 120px;
     }
     
     .btn-admin:hover { 
-      transform: translateY(-10px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
       background: linear-gradient(135deg, #C2185B, var(--primary));
       color: white;
@@ -117,7 +127,7 @@
       border: none; 
       color: white;
       font-weight: 600;
-      border-radius: 50px;
+      border-radius: 15px;
       transition: all 0.3s ease;
       text-decoration: none;
       display: flex;
@@ -127,11 +137,12 @@
       height: 100%;
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-color);
-      padding: 2rem 1rem;
+      padding: 1rem 0.3rem;
+      min-height: 120px;
     }
     
     .btn-edit:hover { 
-      transform: translateY(-10px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
       background: linear-gradient(135deg, #00796B, var(--secondary));
       color: white;
@@ -142,7 +153,7 @@
       border: none; 
       color: var(--text-primary);
       font-weight: 600;
-      border-radius: 50px;
+      border-radius: 15px;
       transition: all 0.3s ease;
       text-decoration: none;
       display: flex;
@@ -152,14 +163,41 @@
       height: 100%;
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-color);
-      padding: 2rem 1rem;
+      padding: 1rem 0.3rem;
+      min-height: 120px;
     }
     
     .btn-danger:hover { 
-      transform: translateY(-10px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
       background: linear-gradient(135deg, #F57C00, var(--accent));
       color: var(--text-primary);
+    }
+    
+    .btn-view-shop {
+      background: linear-gradient(135deg, #9C27B0, #BA68C8);
+      border: none; 
+      color: white;
+      font-weight: 600;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem 0.5rem;
+      min-height: 120px;
+    }
+    
+    .btn-view-shop:hover { 
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      background: linear-gradient(135deg, #7B1FA2, #9C27B0);
+      color: white;
     }
     
     .card-admin { 
@@ -197,48 +235,50 @@
     }
     
     .dashboard-icon {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
       color: var(--primary);
     }
     
     .dashboard-title {
-      font-size: 1.5rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
       color: var(--text-primary);
+      text-align: center;
     }
     
     .dashboard-description {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 0.7rem;
       text-align: center;
+      display: none;
     }
     
     .page-header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
     
     .page-header h1 {
-      font-size: 3rem;
+      font-size: 2.2rem;
       color: var(--primary);
       margin-bottom: 1rem;
     }
     
     .page-header p {
       color: var(--text-secondary);
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     
     .stats-section {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
     
     .stats-card {
       background-color: var(--card-bg);
       border-radius: 15px;
-      padding: 1.5rem;
+      padding: 1rem;
       text-align: center;
       border: 1px solid var(--border-color);
       box-shadow: var(--shadow-soft);
@@ -253,7 +293,7 @@
     }
     
     .stats-number {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 0.5rem;
@@ -261,13 +301,13 @@
     
     .stats-label {
       color: var(--text-secondary);
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
     
     .stats-icon {
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: var(--primary);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
     
     .no-data {
@@ -284,12 +324,12 @@
     
     .loading-spinner {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
       color: var(--text-secondary);
     }
     
     .loading-spinner i {
-      font-size: 2rem;
+      font-size: 1.5rem;
       animation: spin 1s linear infinite;
     }
     
@@ -298,35 +338,137 @@
       100% { transform: rotate(360deg); }
     }
     
-    .floating {
-      animation: floating 3s ease-in-out infinite;
+    .action-buttons {
+      margin-bottom: 2rem;
     }
     
-    @keyframes floating {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0px); }
+    .view-shop-section {
+      margin-bottom: 2rem;
     }
     
-    @media (max-width: 768px) {
-      .page-header h1 {
-        font-size: 2.2rem;
+    /* Ensure proper grid layout for all screen sizes */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -3px;
+      margin-left: -3px;
+    }
+    
+    .col-6 {
+      flex: 0 0 auto;
+      width: 50%;
+      padding-right: 3px;
+      padding-left: 3px;
+    }
+    
+    .col-4 {
+      flex: 0 0 auto;
+      width: 33.333333%;
+      padding-right: 3px;
+      padding-left: 3px;
+    }
+    
+    .col-12 {
+      flex: 0 0 auto;
+      width: 100%;
+      padding-right: 3px;
+      padding-left: 3px;
+    }
+    
+    .container {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    
+    .navbar {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    
+    /* Adjust for larger screens */
+    @media (min-width: 768px) {
+      .navbar-brand {
+        font-size: 2rem;
       }
       
       .dashboard-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .dashboard-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .dashboard-description {
+        font-size: 0.95rem;
+        display: block;
+      }
+      
+      .page-header h1 {
         font-size: 3rem;
       }
       
-      .navbar-nav {
-        flex-direction: column;
+      .page-header p {
+        font-size: 1.2rem;
       }
       
-      .nav-link {
-        margin: 0.2rem 0;
+      .stats-section {
+        margin-bottom: 3rem;
       }
-    }
-    
-    @media (min-width: 769px) {
+      
+      .stats-card {
+        padding: 1.5rem;
+      }
+      
+      .stats-number {
+        font-size: 2.5rem;
+      }
+      
+      .stats-label {
+        font-size: 1rem;
+      }
+      
+      .stats-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .action-buttons {
+        margin-bottom: 3rem;
+      }
+      
+      .view-shop-section {
+        margin-bottom: 3rem;
+      }
+      
+      .btn-admin, .btn-edit, .btn-danger, .btn-view-shop {
+        padding: 2rem 1rem;
+        border-radius: 50px;
+        min-height: auto;
+      }
+      
+      .row {
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+      
+      .col-6, .col-4, .col-12 {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      .navbar {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
       .navbar-nav {
         flex-direction: row;
       }
@@ -349,7 +491,7 @@
 </head>
 <body>
   <nav class="navbar admin-navbar navbar-expand-lg">
-    <div class="container">
+    <div class="container-fluid">
       <a class="navbar-brand" href="/admin/dashboard.html">
         <i class="fas fa-spa me-2"></i> Luxe Blooms Admin
       </a>
@@ -393,15 +535,16 @@
     </div>
   </nav>
 
-  <div class="container py-5">
+  <div class="container py-3">
     <div class="page-header fade-in">
-      <h1 class="floating">Admin Dashboard</h1>
+      <h1>Admin Dashboard</h1>
       <p>Welcome to Luxe Blooms Admin Panel</p>
     </div>
 
+    <!-- Stats Section - Two cards side by side -->
     <div class="stats-section">
-      <div class="row g-4">
-        <div class="col-md-6 fade-in">
+      <div class="row">
+        <div class="col-6 fade-in">
           <div class="stats-card">
             <div class="stats-icon">
               <i class="fas fa-box"></i>
@@ -414,7 +557,7 @@
             <div class="stats-label">Total Products</div>
           </div>
         </div>
-        <div class="col-md-6 fade-in">
+        <div class="col-6 fade-in">
           <div class="stats-card">
             <div class="stats-icon">
               <i class="fas fa-mouse-pointer"></i>
@@ -428,27 +571,43 @@
       </div>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4 fade-in">
-        <a href="/admin/add-product.html" class="btn-admin">
-          <i class="fas fa-plus-circle dashboard-icon"></i>
-          <div class="dashboard-title">Add Product</div>
-          <div class="dashboard-description">Create a new product listing</div>
-        </a>
+    <!-- Action Buttons Section - Three cards in same row -->
+    <div class="action-buttons">
+      <div class="row">
+        <div class="col-4 fade-in">
+          <a href="/admin/add-product.html" class="btn-admin">
+            <i class="fas fa-plus-circle dashboard-icon"></i>
+            <div class="dashboard-title">Add Product</div>
+            <div class="dashboard-description">Create a new product listing</div>
+          </a>
+        </div>
+        <div class="col-4 fade-in">
+          <a href="/admin/edit-product.html" class="btn-edit">
+            <i class="fas fa-edit dashboard-icon"></i>
+            <div class="dashboard-title">Edit Product</div>
+            <div class="dashboard-description">Modify existing product details</div>
+          </a>
+        </div>
+        <div class="col-4 fade-in">
+          <a href="/admin/delete-product.html" class="btn-danger">
+            <i class="fas fa-trash-alt dashboard-icon"></i>
+            <div class="dashboard-title">Delete Product</div>
+            <div class="dashboard-description">Remove products from inventory</div>
+          </a>
+        </div>
       </div>
-      <div class="col-md-4 fade-in">
-        <a href="/admin/edit-product.html" class="btn-edit">
-          <i class="fas fa-edit dashboard-icon"></i>
-          <div class="dashboard-title">Edit Product</div>
-          <div class="dashboard-description">Modify existing product details</div>
-        </a>
-      </div>
-      <div class="col-md-4 fade-in">
-        <a href="/admin/delete-product.html" class="btn-danger">
-          <i class="fas fa-trash-alt dashboard-icon"></i>
-          <div class="dashboard-title">Delete Product</div>
-          <div class="dashboard-description">Remove products from inventory</div>
-        </a>
+    </div>
+
+    <!-- View Shop Section -->
+    <div class="view-shop-section">
+      <div class="row">
+        <div class="col-12 fade-in">
+          <a href="/admin/admin_shop.html" class="btn-view-shop">
+            <i class="fas fa-store dashboard-icon"></i>
+            <div class="dashboard-title">View Shop</div>
+            <div class="dashboard-description">Browse your shop as customers see it</div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -494,7 +653,7 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.stats-card, .btn-admin, .btn-edit, .btn-danger').forEach(el => {
+    document.querySelectorAll('.stats-card, .btn-admin, .btn-edit, .btn-danger, .btn-view-shop').forEach(el => {
       observer.observe(el);
     });
     

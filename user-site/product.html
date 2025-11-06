@@ -125,11 +125,11 @@
       border-radius: 15px;
       box-shadow: var(--shadow-soft);
       aspect-ratio: 1 / 1;
-      max-width: 400px; /* Limits the overall size */
-      max-height: 400px; /* Ensures reduced height while maintaining square shape */
+      max-width: 400px;
+      max-height: 400px;
       width: 100%;
       height: auto;
-      margin: 0 auto; /* Centers the image container */
+      margin: 0 auto;
     }
     
     .product-image-container img {
@@ -168,7 +168,193 @@
     }
     
     .product-detail-row {
-      align-items: flex-start; /* Changed from stretch to flex-start to prevent height stretching */
+      align-items: flex-start;
+    }
+    
+    /* Feedback Section Styles */
+    .feedback-section {
+      margin-top: 5rem;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .feedback-form {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .feedback-list {
+      margin-top: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .feedback-item {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease;
+    }
+    
+    .feedback-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .feedback-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .feedback-author {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+    
+    .feedback-date {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .feedback-rating {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .feedback-text {
+      color: var(--text-primary);
+      line-height: 1.5;
+      font-size: 0.85rem;
+    }
+    
+    .rating-input {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .rating-input .star {
+      font-size: 1.5rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .rating-input .star:hover,
+    .rating-input .star.active {
+      color: var(--accent);
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary), #F06292);
+      border-radius: 3px;
+    }
+    
+    .empty-feedback {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+    
+    .empty-feedback i {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--border-color);
+    }
+    
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1050;
+    }
+    
+    .custom-toast {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: var(--shadow-hover);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      min-width: 300px;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .toast-success {
+      border-left: 4px solid #4CAF50;
+    }
+    
+    .toast-error {
+      border-left: 4px solid #F44336;
+    }
+    
+    .toast-icon {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .toast-success .toast-icon {
+      color: #4CAF50;
+    }
+    
+    .toast-error .toast-icon {
+      color: #F44336;
     }
     
     /* Mobile Optimizations */
@@ -182,6 +368,36 @@
       .btn-primary {
         width: 100%;
         margin-bottom: 1rem;
+      }
+      
+      .feedback-form {
+        padding: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      .feedback-item {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .feedback-author {
+        font-size: 0.9rem;
+      }
+      
+      .feedback-date {
+        font-size: 0.75rem;
+      }
+      
+      .feedback-rating {
+        font-size: 0.8rem;
+      }
+      
+      .feedback-text {
+        font-size: 0.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -231,11 +447,59 @@
     </div>
   </section>
 
+  <!-- Feedback Section -->
+  <section class="container feedback-section">
+    <h2 class="section-title">Customer Reviews</h2>
+    
+    <!-- Feedback Form -->
+    <div class="feedback-form fade-in">
+      <h3 class="mb-4">Share Your Feedback</h3>
+      <form id="feedback-form">
+        <div class="mb-4">
+          <label for="name" class="form-label">Your Name</label>
+          <input type="text" class="form-control" id="name" required>
+        </div>
+        
+        <div class="mb-4">
+          <label class="form-label">Rating</label>
+          <div class="rating-input" id="rating-input">
+            <i class="fas fa-star star" data-rating="1"></i>
+            <i class="fas fa-star star" data-rating="2"></i>
+            <i class="fas fa-star star" data-rating="3"></i>
+            <i class="fas fa-star star" data-rating="4"></i>
+            <i class="fas fa-star star" data-rating="5"></i>
+          </div>
+          <input type="hidden" id="rating" value="0" required>
+        </div>
+        
+        <div class="mb-4">
+          <label for="comment" class="form-label">Your Review</label>
+          <textarea class="form-control" id="comment" rows="4" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </div>
+    
+    <!-- Feedback List -->
+    <div class="feedback-list" id="feedback-list">
+      <div class="empty-feedback">
+        <i class="fas fa-comments"></i>
+        <p>No reviews yet. Be the first to share your thoughts!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
     let currentProduct = null;
+    let selectedRating = 0;
 
+    // Load product details
     async function loadProduct() {
       try {
         const response = await fetch(`/api/products/${productId}`);
@@ -255,6 +519,148 @@
       }
     }
 
+    // Load feedbacks for the product
+    async function loadFeedbacks() {
+      try {
+        const response = await fetch(`/api/products/${productId}/feedbacks`);
+        if (!response.ok) throw new Error('Failed to load feedbacks');
+        const feedbacks = await response.json();
+        
+        const feedbackList = document.getElementById('feedback-list');
+        
+        if (feedbacks.length === 0) {
+          feedbackList.innerHTML = `
+            <div class="empty-feedback">
+              <i class="fas fa-comments"></i>
+              <p>No reviews yet. Be the first to share your thoughts!</p>
+            </div>
+          `;
+          return;
+        }
+        
+        feedbackList.innerHTML = feedbacks.map(feedback => {
+          const date = new Date(feedback.createdAt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          
+          let stars = '';
+          for (let i = 1; i <= 5; i++) {
+            stars += `<i class="fas fa-star ${i <= feedback.rating ? '' : 'text-muted'}"></i>`;
+          }
+          
+          return `
+            <div class="feedback-item fade-in">
+              <div class="feedback-header">
+                <div class="feedback-author">${feedback.name}</div>
+                <div class="feedback-date">${date}</div>
+              </div>
+              <div class="feedback-rating">${stars}</div>
+              <div class="feedback-text">${feedback.comment}</div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('Error loading feedbacks:', err);
+        showToast('Failed to load reviews. Please try again later.', 'error');
+      }
+    }
+
+    // Handle rating selection
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', function() {
+        selectedRating = parseInt(this.getAttribute('data-rating'));
+        document.getElementById('rating').value = selectedRating;
+        
+        // Update UI
+        document.querySelectorAll('.star').forEach(s => {
+          const rating = parseInt(s.getAttribute('data-rating'));
+          if (rating <= selectedRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Handle feedback form submission
+    document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (selectedRating === 0) {
+        showToast('Please select a rating', 'error');
+        return;
+      }
+      
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
+      
+      try {
+        const response = await fetch(`/api/products/${productId}/feedbacks`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            rating: selectedRating,
+            comment
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to submit feedback');
+        }
+        
+        // Reset form
+        this.reset();
+        selectedRating = 0;
+        document.getElementById('rating').value = 0;
+        document.querySelectorAll('.star').forEach(s => {
+          s.classList.remove('active');
+        });
+        
+        // Reload feedbacks
+        loadFeedbacks();
+        
+        // Show success message
+        showToast('Thank you for your review!', 'success');
+      } catch (err) {
+        console.error('Error submitting feedback:', err);
+        showToast(err.message || 'Failed to submit review. Please try again.', 'error');
+      }
+    });
+
+    // Show toast notification
+    function showToast(message, type = 'success') {
+      const toastContainer = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `custom-toast toast-${type}`;
+      
+      const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+      
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <i class="fas ${icon}"></i>
+        </div>
+        <div class="toast-message">${message}</div>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        toast.style.animation = 'slideIn 0.3s ease-out reverse';
+        setTimeout(() => {
+          toastContainer.removeChild(toast);
+        }, 300);
+      }, 5000);
+    }
+
+    // Handle buy now button
     document.getElementById('buy-now-btn').addEventListener('click', () => {
       if (!currentProduct) return;
       
@@ -285,7 +691,10 @@
     });
 
     // Initial load
-    document.addEventListener('DOMContentLoaded', loadProduct);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProduct();
+      loadFeedbacks();
+    });
   </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const productRoutes = require('./routes/productRoutes');
@@ -25,6 +26,25 @@ app.use(session({
 
 // Serve static files for uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Serve static files for assets folder - with debugging
+const assetsPath = path.join(__dirname,'..', 'assets');
+console.log('Assets path:', assetsPath); // Debug log
+
+// Check if assets directory exists
+if (!fs.existsSync(assetsPath)) {
+  console.log('Assets directory does not exist at:', assetsPath);
+  // Create the directory if it doesn't exist
+  fs.mkdirSync(assetsPath, { recursive: true });
+  console.log('Created assets directory at:', assetsPath);
+} else {
+  console.log('Assets directory exists at:', assetsPath);
+  // List files in the directory
+  const files = fs.readdirSync(assetsPath);
+  console.log('Files in assets directory:', files);
+}
+
+app.use('/assets', express.static(assetsPath));
 
 // Serve static files for user site
 app.use(express.static(path.join(__dirname, '../user-site')));

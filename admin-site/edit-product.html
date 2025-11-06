@@ -47,7 +47,7 @@
     
     .navbar-brand {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary) !important;
       display: flex;
@@ -88,11 +88,12 @@
     }
     
     .navbar-toggler {
-      border-color: var(--border-color);
+      border: none;
+      padding: 0.25rem 0.5rem;
     }
     
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    .navbar-toggler:focus {
+      box-shadow: none;
     }
     
     .btn-admin { 
@@ -439,7 +440,82 @@
       100% { transform: translateY(0px); }
     }
     
-    @media (max-width: 768px) {
+    /* Modal styles */
+    .edit-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1050;
+      overflow-y: auto;
+    }
+    
+    .edit-modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow-hover);
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 0;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-close:hover {
+      background-color: var(--bg-light);
+      color: var(--primary);
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 767.98px) {
       .page-header {
         flex-direction: column;
         gap: 1rem;
@@ -458,18 +534,41 @@
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       }
       
-      .navbar-nav {
-        flex-direction: column;
+      .navbar {
+        padding-left: 10px;
+        padding-right: 10px;
       }
       
-      .nav-link {
-        margin: 0.2rem 0;
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      .container {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      
+      .card-admin .card-body {
+        padding: 1.5rem;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 1rem;
+      }
+      
+      .modal-header, .modal-body {
+        padding: 1rem;
       }
     }
     
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       .navbar-nav {
         flex-direction: row;
+      }
+      
+      .navbar-brand {
+        font-size: 2rem;
       }
     }
   </style>
@@ -490,7 +589,7 @@
 </head>
 <body>
   <nav class="navbar admin-navbar navbar-expand-lg">
-    <div class="container">
+    <div class="container-fluid">
       <a class="navbar-brand" href="/admin/dashboard.html">
         <i class="fas fa-spa me-2"></i> Luxe Blooms Admin
       </a>
@@ -570,8 +669,21 @@
           <h4>No product found</h4>
           <p>Please check the product name and try again</p>
         </div>
-        
-        <form id="edit-product-form" enctype="multipart/form-data" style="display: none;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div id="edit-modal" class="edit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Product</h5>
+        <button class="modal-close" onclick="closeEditModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-product-form" enctype="multipart/form-data">
           <input type="hidden" id="edit-product-id">
           
           <div class="row">
@@ -609,7 +721,7 @@
               <div class="form-group">
                 <label class="form-label">New Image (optional)</label>
                 <div class="file-upload">
-                  <input type="file" class="form-control" name="image" id="edit-image" accept="image/*" capture="environment">
+                  <input type="file" class="form-control" name="image" id="edit-image" accept="image/*">
                   <label for="edit-image" class="file-upload-label">
                     <i class="fas fa-camera"></i> Choose New Image
                   </label>
@@ -753,9 +865,16 @@
     function selectProduct(productId, productName) {
       document.getElementById('search-name').value = productName;
       searchAndLoadProduct();
-      
-      // Scroll to form
-      document.querySelector('.search-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Close edit modal
+    function closeEditModal() {
+      document.getElementById('edit-modal').classList.remove('show');
+      document.getElementById('edit-product-form').reset();
+      document.getElementById('image-preview').style.display = 'none';
+      document.getElementById('current-image-container').style.display = 'none';
+      document.getElementById('edit-error').style.display = 'none';
+      document.getElementById('edit-success').style.display = 'none';
     }
 
     // Image preview functionality
@@ -788,7 +907,7 @@
         const response = await fetch(`/api/admin/products/search?name=${encodeURIComponent(name)}`);
         if (!response.ok) {
           document.getElementById('no-results').style.display = 'block';
-          document.getElementById('edit-product-form').style.display = 'none';
+          closeEditModal();
           return;
         }
         
@@ -807,8 +926,8 @@
         currentImage.src = product.imageUrl;
         currentImageContainer.style.display = 'block';
         
-        // Show form and hide no results
-        document.getElementById('edit-product-form').style.display = 'block';
+        // Show modal and hide no results
+        document.getElementById('edit-modal').classList.add('show');
         document.getElementById('no-results').style.display = 'none';
         
       } catch (err) {
@@ -850,6 +969,7 @@
           loadAllProducts();
           
           setTimeout(() => {
+            closeEditModal();
             window.location.href = '/admin/dashboard.html';
           }, 2000);
         } else {
@@ -862,6 +982,14 @@
         errorSpan.textContent = 'Network error. Please check your connection and try again.';
         errorDiv.style.display = 'block';
         successDiv.style.display = 'none';
+      }
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('edit-modal');
+      if (event.target === modal) {
+        closeEditModal();
       }
     });
 
