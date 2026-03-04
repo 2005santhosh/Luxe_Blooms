@@ -466,6 +466,7 @@
   </section>
 
   <script>
+    const API_URL = "https://luxeblooms-production.up.railway.app";
     let currentPage = 0;
     const itemsPerPage = 8;
     let allProducts = [];
@@ -488,7 +489,7 @@
       });
       
       try {
-        const response = await fetch(`/api/products?${params}`);
+        const response = await fetch(`${API_URL}/api/products?${params}`);
         if (!response.ok) throw new Error('Failed to load products');
         
         const products = await response.json();

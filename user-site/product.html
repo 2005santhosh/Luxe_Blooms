@@ -494,6 +494,7 @@
   <div class="toast-container" id="toast-container"></div>
 
   <script>
+    const API_URL = "https://luxeblooms-production.up.railway.app";
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
     let currentProduct = null;
@@ -502,7 +503,7 @@
     // Load product details
     async function loadProduct() {
       try {
-        const response = await fetch(`/api/products/${productId}`);
+        const response = await fetch(`${API_URL}/api/products/${productId}`);
         if (!response.ok) throw new Error('Product not found');
         currentProduct = await response.json();
 
@@ -522,7 +523,7 @@
     // Load feedbacks for the product
     async function loadFeedbacks() {
       try {
-        const response = await fetch(`/api/products/${productId}/feedbacks`);
+        const response = await fetch(`${API_URL}/api/products/${productId}/feedbacks`);
         if (!response.ok) throw new Error('Failed to load feedbacks');
         const feedbacks = await response.json();
         
@@ -598,7 +599,7 @@
       const comment = document.getElementById('comment').value;
       
       try {
-        const response = await fetch(`/api/products/${productId}/feedbacks`, {
+        const response = await fetch(`${API_URL}/api/products/${productId}/feedbacks`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

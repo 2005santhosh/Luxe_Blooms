@@ -178,7 +178,7 @@
   <script>
   // Common auth check for all admin pages (except login)
   if (window.location.pathname !== '/admin/login.html') {
-    fetch('/api/admin/check-auth')
+    fetch(`${API_URL}/api/admin/check-auth`)
       .then(res => res.json())
       .then(data => {
         if (!data.authenticated) {
@@ -255,6 +255,7 @@
   </div>
 
   <script>
+    const API_URL = "https://luxeblooms-production.up.railway.app";
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('email').value;
@@ -263,7 +264,7 @@
       const errorSpan = errorDiv.querySelector('span');
 
       try {
-        const response = await fetch('/api/admin/login', {
+        const response = await fetch(`${API_URL}/api/admin/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
