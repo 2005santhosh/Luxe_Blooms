@@ -1,7 +1,7 @@
 {
   "routes": [
     { "src": "/", "dest": "/index.html" },
-    { "src": "/shop", "dest": "/shop.html" },
-    { "src": "/product", "dest": "/product.html" }
+    { "src": "/shop.html", "dest": "/shop.html" },
+    { "src": "/product.html", "dest": "/product.html" }
   ]
 }
