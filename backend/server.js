@@ -48,11 +48,6 @@ if (!fs.existsSync(assetsPath)) {
 
 app.use('/assets', express.static(assetsPath));
 
-// Serve static files for user site
-app.use(express.static(path.join(__dirname, '../user-site')));
-
-// Serve static files for admin site under /admin
-app.use('/admin', express.static(path.join(__dirname, '../admin-site')));
 
 // API Routes
 app.use('/api/products', productRoutes);
@@ -70,15 +65,6 @@ app.get('/admin/*', (req, res) => {
 });
 
 // Catch-all for user site SPA-like routing (with extension check)
-app.get('*', (req, res) => {
-  // If the path has a file extension, treat as static request and 404 if not found (static middleware already checked)
-  if (req.path.match(/\.(html|css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i)) {
-    return res.status(404).send('File not found');
-  }
-  // Otherwise, serve user index for SPA routing
-  res.sendFile(path.join(__dirname, '../user-site/index.html'));
-});
-
 // MongoDB Atlas Connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
